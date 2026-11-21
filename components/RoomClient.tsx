@@ -204,7 +204,7 @@ export default function RoomClient() {
                   <img
                     src={snaps[i]}
                     alt={`Snap ${i + 1}`}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-contain bg-putty/30"
                   />
                 ) : (
                   <span className="font-display text-2xl text-putty">{pad(i + 1)}</span>
