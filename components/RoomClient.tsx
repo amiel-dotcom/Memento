@@ -139,7 +139,7 @@ export default function RoomClient() {
   }
 
   return (
-    <main className="max-w-6xl mx-auto px-6 py-8">
+    <main className="max-w-6xl mx-auto px-4 sm:px-6 py-5 sm:py-8">
       {/* white flash */}
       <div
         className={`fixed inset-0 z-[60] bg-white pointer-events-none ${
@@ -147,15 +147,15 @@ export default function RoomClient() {
         }`}
       />
 
-      <header className="flex items-center justify-between border-b-[1.5px] border-ink pb-4">
-        <Link href="/" className="font-display text-3xl leading-none">
+      <header className="flex items-center justify-between gap-3 border-b-[1.5px] border-ink pb-4">
+        <Link href="/" className="font-display text-2xl sm:text-3xl leading-none">
           Memento
         </Link>
         <RoomCodeTicket code={code} />
       </header>
 
-      <div className="mt-8 grid gap-8 lg:grid-cols-[minmax(0,1fr)_340px]">
-        <section>
+      <div className="mt-6 sm:mt-8 grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1fr)_340px]">
+        <section className="min-w-0">
           <Viewfinder
             videoRef={videoRef}
             stream={stream}
@@ -164,8 +164,8 @@ export default function RoomClient() {
             countdown={countdown}
           />
 
-          <div className="mt-6 flex items-center justify-between">
-            <p className="font-mono text-sm tracking-[0.2em]">
+          <div className="mt-5 sm:mt-6 grid grid-cols-[1fr_auto_1fr] items-center gap-2">
+            <p className="font-mono text-xs sm:text-sm tracking-[0.1em] sm:tracking-[0.2em]">
               FRAME {pad(snaps.length)} / {pad(total)}
             </p>
 
@@ -176,11 +176,11 @@ export default function RoomClient() {
               className="w-20 h-20 rounded-full border-[1.5px] border-ink bg-vermilion shadow-hard transition-transform active:translate-x-[3px] active:translate-y-[3px] active:shadow-none disabled:opacity-40 disabled:pointer-events-none"
             />
 
-            <div className="w-[120px] flex justify-end">
+            <div className="flex justify-end">
               {snaps.length > 0 && !busy && (
                 <button
                   onClick={startOver}
-                  className="font-mono text-xs tracking-[0.2em] underline underline-offset-4"
+                  className="py-3 font-mono text-xs tracking-[0.2em] underline underline-offset-4"
                 >
                   START OVER
                 </button>
@@ -189,8 +189,13 @@ export default function RoomClient() {
           </div>
 
           <div
-            className="mt-6 grid gap-3"
-            style={{ gridTemplateColumns: `repeat(${total}, minmax(0, 1fr))` }}
+            className="mt-5 sm:mt-6 grid gap-2 sm:gap-3 grid-cols-[repeat(var(--mcols),minmax(0,1fr))] sm:grid-cols-[repeat(var(--cols),minmax(0,1fr))]"
+            style={
+              {
+                "--cols": total,
+                "--mcols": total === 4 ? 2 : 3,
+              } as React.CSSProperties
+            }
           >
             {Array.from({ length: total }).map((_, i) => (
               <div
@@ -216,14 +221,14 @@ export default function RoomClient() {
           {collageUrl && !modalOpen && (
             <button
               onClick={() => setDismissedFor(null)}
-              className="mt-6 border-[1.5px] border-ink bg-ink text-paper px-8 py-4 text-lg font-bold shadow-hard transition-transform active:translate-x-[3px] active:translate-y-[3px] active:shadow-none"
+              className="mt-6 w-full sm:w-auto border-[1.5px] border-ink bg-ink text-paper px-8 py-4 text-lg font-bold shadow-hard transition-transform active:translate-x-[3px] active:translate-y-[3px] active:shadow-none"
             >
               View strip
             </button>
           )}
         </section>
 
-        <aside className="self-start bg-white border-[1.5px] border-ink shadow-hard p-5">
+        <aside className="self-start min-w-0 bg-white border-[1.5px] border-ink shadow-hard p-4 sm:p-5">
           <GuestList
             videoRef={remoteVideoRef}
             cameraOn={!!stream}
