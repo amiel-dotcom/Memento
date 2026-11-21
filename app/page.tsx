@@ -6,7 +6,7 @@ import { makeRoomCode } from "../lib/roomCode";
 import JoinModal from "../components/JoinModal";
 
 const btnBase =
-  "border-[1.5px] border-ink px-8 py-4 text-lg font-semibold shadow-hard transition-transform active:translate-x-[3px] active:translate-y-[3px] active:shadow-none";
+  "w-full sm:w-auto border-[1.5px] border-ink px-8 py-4 text-lg font-semibold shadow-hard transition-transform active:translate-x-[3px] active:translate-y-[3px] active:shadow-none";
 
 export default function Home() {
   const router = useRouter();
@@ -17,16 +17,16 @@ export default function Home() {
   }
 
   return (
-    <main className="min-h-screen flex items-center justify-center px-6">
-      <div className="text-center">
-        <h1 className="font-display text-7xl sm:text-8xl leading-none">
+    <main className="min-h-svh flex items-center justify-center px-4 sm:px-6">
+      <div className="text-center w-full">
+        <h1 className="font-display text-6xl sm:text-8xl leading-none">
           Memento
         </h1>
-        <p className="mt-4 text-lg text-ink/70">
-         Memories Made in a Click
+        <p className="mt-4 text-base sm:text-lg text-ink/70">
+          A tiny photo booth for two. Step in and snap.
         </p>
 
-        <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
+        <div className="mt-10 mx-auto max-w-xs sm:max-w-none flex flex-col sm:flex-row gap-4 justify-center">
           <button onClick={createRoom} className={`${btnBase} bg-ink text-paper`}>
             Create Room
           </button>
