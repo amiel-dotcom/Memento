@@ -53,6 +53,9 @@ export default function CollageModal({ url, code, onClose }: Props) {
           >
             Download Collage
           </a>
+          <p className="mt-2 text-center text-xs text-ink/60 sm:hidden">
+            If it doesn&apos;t download, press and hold the strip to save it.
+          </p>
         </div>
       </div>
     </div>
