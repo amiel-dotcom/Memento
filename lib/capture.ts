@@ -32,22 +32,18 @@ export function snapshot(
 ): string | null {
   if (!local.videoWidth) return null;
 
-  const W = 1200;
-  const H = 900;
+  const PW = 800;
+  const PH = 600;
+  const hasRemote = !!remote && remote.videoWidth > 0;
+
   const canvas = document.createElement("canvas");
-  canvas.width = W;
-  canvas.height = H;
+  canvas.width = hasRemote ? PW * 2 : PW;
+  canvas.height = PH;
   const ctx = canvas.getContext("2d");
   if (!ctx) return null;
 
-  const hasRemote = !!remote && remote.videoWidth > 0;
-
-  if (hasRemote && remote) {
-    drawCover(ctx, local, 0, 0, W / 2, H, true);
-    drawCover(ctx, remote, W / 2, 0, W / 2, H, false);
-  } else {
-    drawCover(ctx, local, 0, 0, W, H, true);
-  }
+  drawCover(ctx, local, 0, 0, PW, PH, true);
+  if (hasRemote && remote) drawCover(ctx, remote, PW, 0, PW, PH, false);
 
   return canvas.toDataURL("image/jpeg", 0.92);
 }
