@@ -57,7 +57,7 @@ export default function JoinModal({ onClose }: { onClose: () => void }) {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-ink/50 px-4"
+      className="fixed inset-0 z-50 flex items-start sm:items-center justify-center bg-ink/50 px-4 pt-[12vh] sm:pt-0"
       onClick={onClose}
     >
       <form
@@ -65,20 +65,22 @@ export default function JoinModal({ onClose }: { onClose: () => void }) {
         onClick={(e) => e.stopPropagation()}
         className="w-full max-w-md bg-paper border-[1.5px] border-ink shadow-hard"
       >
-        <div className="flex items-center justify-between border-b-[1.5px] border-ink px-5 py-3 font-mono text-xs tracking-[0.25em]">
+        <div className="flex items-center justify-between border-b-[1.5px] border-ink px-4 sm:px-5 py-3 font-mono text-xs tracking-[0.25em]">
           <span>ADMIT TWO</span>
-          <button type="button" onClick={onClose} aria-label="Close">
+          <button type="button" onClick={onClose} aria-label="Close" className="px-2">
             ✕
           </button>
         </div>
 
-        <div className="px-5 pt-6 pb-5">
-          <h2 className="font-display text-4xl leading-none">Enter your code</h2>
+        <div className="px-4 sm:px-5 pt-6 pb-5">
+          <h2 className="font-display text-3xl sm:text-4xl leading-none">
+            Enter your code
+          </h2>
           <p className="mt-2 text-sm text-ink/70">
             Ask your friend for the 6-character room code.
           </p>
 
-          <div className="mt-6 flex gap-2 justify-between">
+          <div className="mt-6 flex gap-1.5 sm:gap-2">
             {chars.map((c, i) => (
               <input
                 key={i}
@@ -92,13 +94,16 @@ export default function JoinModal({ onClose }: { onClose: () => void }) {
                 maxLength={2}
                 inputMode="text"
                 autoComplete="off"
-                className="w-12 h-16 text-center font-mono text-2xl uppercase bg-white border-[1.5px] border-ink focus:outline-none focus:bg-paper focus:shadow-hard"
+                autoCorrect="off"
+                autoCapitalize="characters"
+                spellCheck={false}
+                className="flex-1 min-w-0 h-14 sm:h-16 text-center font-mono text-xl sm:text-2xl uppercase bg-white border-[1.5px] border-ink focus:outline-none focus:bg-paper focus:shadow-hard"
               />
             ))}
           </div>
         </div>
 
-        <div className="border-t-[1.5px] border-dashed border-putty px-5 py-4">
+        <div className="border-t-[1.5px] border-dashed border-putty px-4 sm:px-5 py-4">
           <button
             type="submit"
             disabled={!ready}
